@@ -1,0 +1,73 @@
+// Cores
+$cor-primaria: #60AB33; // Verde principal
+$cor-secundaria: #6c757d; // Cinza secundário
+$cor-fundo: #f0f0f0; // Cor de fundo geral
+$cor-texto-principal: #000000; // Preto para texto principal
+$cor-texto-secundario: #ffffff; // Branco para texto secundário
+$cor-tarefa-disponivel: #4CAF50; // Verde para tarefas disponíveis
+$cor-tarefa-nao-concluida: #F44336; // Vermelho para tarefas não concluídas
+$cor-tarefa-concluida: #4CAF50; // Verde para tarefas concluídas
+
+// Tipografia
+$fonte-principal: sans-serif;
+$tamanho-fonte-principal: 1rem;
+$tamanho-fonte-titulo: 1.25rem;
+
+// Espaçamento
+$padding-pequeno: 0.5rem;
+$padding-medio: 1rem;
+$padding-grande: 1.5rem;
+$margem-pequena: 0.5rem;
+$margem-media: 1rem;
+$margem-grande: 1.5rem;
+
+// Mixins
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// Tamanhos de fonte para diferentes densidades de tela
+@media (min-resolution: 320dpi) and (max-resolution: 320dpi) {
+  $tamanho-fonte-principal: 0.875rem; // 14px
+  $tamanho-fonte-titulo: 1.125rem; // 18px
+}
+
+@media (min-resolution: 321dpi) and (max-resolution: 430dpi) {
+  $tamanho-fonte-principal: 1rem; // 16px
+  $tamanho-fonte-titulo: 1.25rem; // 20px
+}
+
+// Tamanhos de fonte para tablets
+@media (min-width: 768px) {
+  $tamanho-fonte-principal: 1.125rem; // 18px
+  $tamanho-fonte-titulo: 1.375rem; // 22px
+}
+
+// Tamanhos de fonte para computadores
+@media (min-width: 1024px) {
+  $tamanho-fonte-principal: 1.25rem; // 20px
+  $tamanho-fonte-titulo: 1.5rem; // 24px
+}
+
+@mixin botao {
+  padding: $padding-medio $padding-grande;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: $fonte-principal;
+}
+
+@mixin link_limpo {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  
+  &:hover,
+  &:visited,
+  &:active {
+    color: inherit;
+    text-decoration: none;
+  }
+}
