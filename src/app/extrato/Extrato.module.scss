@@ -1,0 +1,61 @@
+@import '../../style/design';
+
+.extrato {
+  padding: $padding-medio;
+  background-color: $cor-fundo;
+  min-height: 100vh;
+
+  &__titulo {
+    font-family: $fonte-principal;
+    font-size: $tamanho-fonte-titulo;
+    color: $cor-texto-principal;
+    margin-bottom: $margem-grande;
+  }
+
+  &__lista {
+    display: flex;
+    flex-direction: column;
+    gap: $margem-pequena;
+  }
+
+  &__item {
+    background-color: $cor-tarefa-disponivel;
+    padding: $padding-medio;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: $cor-texto-secundario;
+
+    &-info {
+      display: flex;
+      flex-direction: column;
+      gap: $margem-pequena;
+    }
+
+    &-titulo {
+      font-size: $tamanho-fonte-principal;
+      font-family: $fonte-principal;
+      margin: 0;
+    }
+
+    &-data {
+      font-size: 0.875rem;
+      opacity: 0.8;
+    }
+
+    &-pontos {
+      font-size: $tamanho-fonte-titulo;
+      font-weight: bold;
+    }
+  }
+}
+
+// Responsividade
+@media (min-width: 768px) {
+  .extrato {
+    padding: $padding-grande;
+    max-width: 768px;
+    margin: 0 auto;
+  }
+}

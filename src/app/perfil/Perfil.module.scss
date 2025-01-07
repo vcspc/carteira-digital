@@ -1,0 +1,142 @@
+@import '../../style/design';
+
+.perfil {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: $padding-grande;
+  background-color: $cor-fundo;
+  
+  &__titulo {
+    font-size: $tamanho-fonte-titulo;
+    font-family: $fonte-principal;
+    color: $cor-texto-principal;
+    margin-bottom: $margem-media;
+  }
+
+  &__icone {
+    width: 64px;
+    height: 64px;
+    margin-bottom: $margem-grande;
+  }
+
+  &__editar {
+    width: 24px;
+    height: 24px;
+    margin-left: $margem-pequena;
+  }
+
+  &__info {
+    @include flex-center;
+    flex-direction: column;
+    width: 100%;
+    max-width: 320px;
+    margin-top: $margem-grande;
+  }
+
+  &__label {
+    color: $cor-secundaria;
+    font-size: $tamanho-fonte-principal;
+    margin-bottom: $margem-pequena;
+    font-family: $fonte-principal;
+    font-weight: 800;
+  }
+
+  &__valor {
+    color: $cor-texto-principal;
+    font-size: $tamanho-fonte-principal;
+    display: flex;
+    align-items: center;
+    font-family: $fonte-principal;
+
+    .perfil__editar {
+      cursor: pointer;
+    }
+  }
+
+  &__input {
+    font-family: $fonte-principal;
+    font-size: $tamanho-fonte-principal;
+    color: $cor-texto-principal;
+    border: 1px solid $cor-secundaria;
+    border-radius: 4px;
+    padding: $padding-pequeno;
+    margin-right: $margem-pequena;
+    width: 150px;
+
+    &:focus {
+      outline: none;
+      border-color: $cor-primaria;
+    }
+  }
+
+  &__avatar {
+    position: relative;
+    cursor: pointer;
+    margin-bottom: $margem-grande;
+  }
+
+  &__editarFoto {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: $cor-primaria;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    @include flex-center;
+    cursor: pointer;
+    
+    img {
+      filter: brightness(0) invert(1);
+    }
+  }
+
+  &__seletorAvatar {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: $cor-fundo;
+    border: 1px solid $cor-secundaria;
+    border-radius: 8px;
+    padding: $padding-pequeno;
+    margin-top: $margem-pequena;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: $margem-pequena;
+    z-index: 10;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-left: 8px solid transparent;
+      border-right: 8px solid transparent;
+      border-bottom: 8px solid $cor-secundaria;
+    }
+  }
+
+  &__opcaoAvatar {
+    cursor: pointer;
+    border-radius: 50%;
+    transition: transform 0.2s ease;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+
+  &__icone {
+    border-radius: 50%;
+    border: 2px solid $cor-primaria;
+    transition: filter 0.2s ease;
+
+    &:hover {
+      filter: brightness(0.9);
+    }
+  }
+}

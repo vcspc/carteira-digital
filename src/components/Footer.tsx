@@ -6,14 +6,14 @@ export default function Footer() {
             <Link href="/home" className="footer__link">
                 <img src="home.svg" alt="Home" className="footer__icon" />
             </Link>
-            <Link href="#" className="footer__link">
+            <Link href="/extrato" className="footer__link">
                 <img src="dollar.svg" alt="Dollar" className="footer__icon" />
             </Link>
-            <Link href="#" className="footer__link">
-                <img src="rank.svg" alt="Building" className="footer__icon" />
+            <Link href="/ranking" className="footer__link">
+                <img src="rank.svg" alt="Ranking" className="footer__icon" />
             </Link>
-            <Link href="#" className="footer__link">
-                <img src="perfil.svg" alt="User" className="footer__icon" />
+            <Link href="/perfil" className="footer__link">
+                <img src="perfil.svg" alt="Perfil" className="footer__icon" />
             </Link>
         </footer>
     );
