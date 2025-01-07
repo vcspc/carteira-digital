@@ -28,17 +28,20 @@ header {
         
         .header_container_left {
 
+            @include d.link_limpo;
             display: flex;
-            height: 90%;
-            justify-self: start;
-            align-self: end;
-            justify-content: space-between;
-            align-items: space-between;
             flex-direction: column;
-           
-            a {
-                @include d.link_limpo;
-            }
+            align-self: flex-start;
+            justify-content: start;
+            height: 3rem;
+
+            
+
+                .header_container_left_img {
+                    width: 2rem;
+                    height: auto;
+                    margin-bottom: 0.5rem;
+                }
             
 
         }
@@ -52,5 +55,26 @@ header {
             width: 23%;
 
         }
+    }
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: d.$cor-primaria;
+    height: 4rem;
+
+    .footer__link {
+        text-decoration: none;
+
+        .footer__icon {
+            width: 2rem;
+            height: auto;
+        }
+        
     }
 }

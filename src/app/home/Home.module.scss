@@ -1,0 +1,117 @@
+// Importar variáveis do design system
+@use '../../style/design' as *;
+
+.wallet {
+  padding: $padding-medio;
+  background-color: white;
+  min-height: 100vh;
+
+  &__account {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: $margem-grande * 2;
+  }
+
+  &__account-info {
+    h2 {
+      font-size: $tamanho-fonte-titulo;
+      margin: $margem-pequena 0;
+      font-weight: 500;
+
+      @media (min-width: 768px) {
+        font-size: $tamanho-fonte-titulo * 1.2;
+      }
+    }
+
+    span {
+      font-size: $tamanho-fonte-principal;
+      color: $cor-texto-principal;
+    }
+  }
+
+  &__account-arrow {
+    font-size: $tamanho-fonte-titulo;
+    color: $cor-texto-principal;
+  }
+
+  &__challenges {
+    &-title {
+      color: $cor-texto-principal;
+      font-size: $tamanho-fonte-principal;
+      margin-bottom: $margem-media;
+      font-weight: 500;
+    }
+  }
+
+  &__challenge-list {
+    background-color: $cor-tarefa-disponivel;
+    padding: $padding-medio;
+    border-radius: 8px;
+    color: $cor-texto-secundario;
+    margin-bottom: $margem-grande;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+
+    &--completed {
+      background-color: $cor-tarefa-concluida;
+    }
+  }
+
+  &__challenge-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: $padding-pequeno 0;
+    font-size: $tamanho-fonte-principal;
+
+    &:not(:last-child) {
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+  }
+
+  &__challenge-text {
+    display: flex;
+    align-items: center;
+    gap: $padding-pequeno;
+  }
+
+  &__account-link {
+    @include link_limpo;
+    display: flex;
+    align-items: center;
+    padding: $padding-pequeno;
+    margin: -$padding-pequeno;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.05);
+    }
+
+    &:active {
+      background-color: rgba(0, 0, 0, 0.1);
+    }
+  }
+}
+
+// Adicionar breakpoints para responsividade
+@media (min-width: 768px) {
+  .wallet {
+    padding: $padding-grande;
+
+    &__challenge-list {
+      padding: $padding-grande;
+    }
+
+    &__challenge-item {
+      padding: $padding-medio 0;
+    }
+  }
+}
+
+@media (min-width: 1024px) {
+  .wallet {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+}

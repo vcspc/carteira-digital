@@ -4,8 +4,8 @@ export default function Header() {
   return (
     <header>
         <div className="header_container">
-            <div className="header_container_left">
-                <Link href="/perfil">
+            <div>
+                <Link className="header_container_left" href="/perfil">
                     <img className="header_container_left_img" src="img_perfil.svg" alt="Imagem de perfil" />
                     <p className="header_container_left_text">Ola, José</p>
                 </Link>
