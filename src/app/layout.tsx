@@ -1,24 +1,29 @@
-import type { Metadata } from "next";
+'use client';
+
 import "./globals.scss";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-
-export const metadata: Metadata = {
-  title: "Carteira Digital",
-  description: "Carteira digital de pontos do Ministério Jovem do Itaóca",
-  authors: [{ name: "Ministério Jovem do Itaóca", url: "https://www.mjitaoca.com.br" }],
-  keywords: ["carteira digital", "pontos", "ministério jovem", "itaóca"],
-};
+import { usePathname } from 'next/navigation';
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const pathname = usePathname();
+
+  const shouldShowGreeting = !['/extrato', '/ranking', '/perfil'].includes(pathname);
+  const shouldShowEyeIcon = !['/extrato', '/ranking', '/perfil'].includes(pathname);
+  const shouldShowHelpIcon = true;
+
   return (
     <html lang="pt-BR">
       <body>
-        <Header />
+        <Header 
+          showGreeting={shouldShowGreeting}
+          showEyeIcon={shouldShowEyeIcon}
+          showHelpIcon={shouldShowHelpIcon}
+        />
         {children}
         <Footer />
       </body>
