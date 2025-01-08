@@ -114,7 +114,7 @@ export default function Perfil() {
         </div>
         
         <p className={styles.perfil__label}>
-          vitonicius@gmail.com
+          vinicius.vcspc@gmail.com
         </p>
       </div>
     </div>
