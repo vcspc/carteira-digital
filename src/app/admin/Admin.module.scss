@@ -1,0 +1,108 @@
+@import '@/style/_design.scss';
+
+.admin {
+  font-family: $fonte-principal;
+  padding: $padding-grande;
+  background-color: $cor-fundo;
+  min-height: 100vh;
+
+  &__titulo {
+    font-size: $tamanho-fonte-titulo;
+    margin-bottom: $margem-grande;
+    color: $cor-texto-principal;
+  }
+
+  &__secao {
+    margin-bottom: $margem-grande;
+  }
+
+  &__lista {
+    background-color: $cor-primaria;
+    border-radius: 8px;
+    padding: $padding-medio;
+    margin-bottom: $margem-grande;
+  }
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: $cor-texto-secundario;
+    padding: $padding-pequeno 0;
+  }
+
+  &__valor {
+    font-weight: bold;
+  }
+
+  &__botao {
+    @include botao;
+    background-color: $cor-texto-secundario;
+    color: $cor-texto-principal;
+    font-size: 0.875rem;
+    padding: $padding-pequeno $padding-medio;
+
+    &--editar {
+      background-color: #FFA500;
+      color: $cor-texto-secundario;
+    }
+
+    &--excluir {
+      background-color: #FF4444;
+      color: $cor-texto-secundario;
+    }
+  }
+
+  &__adicionar {
+    @include botao;
+    background-color: #ffff00;
+    color: $cor-texto-principal;
+    font-size: 0.875rem;
+    padding: $padding-pequeno $padding-medio;
+    margin-top: $margem-pequena;
+  }
+
+  &__acoes {
+    display: flex;
+    align-items: center;
+    gap: $margem-pequena;
+  }
+
+  &__icon-button {
+    @include botao;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    
+    &--editar {
+      background-color: transparent;
+      border: none;
+      
+      &:hover {
+        background-color: darken(#FFA500, 10%);
+      }
+    }
+
+    &--excluir {
+      background-color: transparent;
+      border: none;
+      
+      &:hover {
+        background-color: darken(#FF4444, 10%);
+      }
+    }
+  }
+
+  // Placeholder temporário para os ícones
+  :global(.icon-placeholder) {
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+  }
+}
