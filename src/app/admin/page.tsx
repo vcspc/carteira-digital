@@ -3,6 +3,7 @@ import { useState } from 'react'
 import styles from './Admin.module.scss'
 import { DesafioModal } from './components/DesafioModal'
 import { EditIcon, DeleteIcon } from './components/Icons'
+import { UsuarioModal } from './components/UsuarioModal'
 
 export default function AdminPage() {
   const [showModal, setShowModal] = useState(false)
@@ -13,11 +14,13 @@ export default function AdminPage() {
     { nome: 'Falar sobre Jesus', valor: '200 C$' }
   ])
 
-  const usuarios = [
-    { nome: 'Shandriny Costa' },
-    { nome: 'Nataliane Silva' },
-    { nome: 'Vinicius Costa' }
-  ]
+  const [showUsuarioModal, setShowUsuarioModal] = useState(false)
+  const [usuarioParaEditar, setUsuarioParaEditar] = useState<{ nome: string, email: string, senha: string } | null>(null)
+  const [usuarios, setUsuarios] = useState([
+    { nome: 'Shandriny Costa', email: 'shandriny@email.com', senha: '123456' },
+    { nome: 'Nataliane Silva', email: 'nataliane@email.com', senha: '123456' },
+    { nome: 'Vinicius Costa', email: 'vinicius@email.com', senha: '123456' }
+  ])
 
   const adicionarOuEditarDesafio = (novoDesafio: { nome: string, valor: string }) => {
     if (desafioParaEditar) {
@@ -39,6 +42,17 @@ export default function AdminPage() {
   const abrirModalEdicao = (desafio: { nome: string, valor: string }) => {
     setDesafioParaEditar(desafio)
     setShowModal(true)
+  }
+
+  const adicionarOuEditarUsuario = (novoUsuario: { nome: string, email: string, senha: string }) => {
+    if (usuarioParaEditar) {
+      setUsuarios(usuarios.map(usuario => 
+        usuario.nome === usuarioParaEditar.nome ? novoUsuario : usuario
+      ))
+      setUsuarioParaEditar(null)
+    } else {
+      setUsuarios([...usuarios, novoUsuario])
+    }
   }
 
   return (
@@ -86,11 +100,37 @@ export default function AdminPage() {
           {usuarios.map((usuario, index) => (
             <div key={index} className={styles.admin__item}>
               <span>{usuario.nome}</span>
-              <button className={styles.admin__botao}>add desafio</button>
+              <div className={styles.admin__acoes}>
+                <button 
+                  className={`${styles.admin__icon_button} ${styles['admin__icon-button--editar']}`}
+                  onClick={() => {
+                    setUsuarioParaEditar(usuario)
+                    setShowUsuarioModal(true)
+                  }}
+                  title="Editar usuário"
+                >
+                  <EditIcon />
+                </button>
+                <button 
+                  className={`${styles.admin__icon_button} ${styles['admin__icon-button--excluir']}`}
+                  onClick={() => setUsuarios(usuarios.filter(u => u.nome !== usuario.nome))}
+                  title="Excluir usuário"
+                >
+                  <DeleteIcon />
+                </button>
+              </div>
             </div>
           ))}
         </div>
-        <button className={styles.admin__adicionar}>adicionar</button>
+        <button 
+          className={styles.admin__adicionar}
+          onClick={() => {
+            setUsuarioParaEditar(null)
+            setShowUsuarioModal(true)
+          }}
+        >
+          adicionar
+        </button>
       </section>
 
       {showModal && (
@@ -102,6 +142,18 @@ export default function AdminPage() {
           onAdicionar={adicionarOuEditarDesafio}
           desafioParaEditar={desafioParaEditar || undefined}
           modoEdicao={!!desafioParaEditar}
+        />
+      )}
+
+      {showUsuarioModal && (
+        <UsuarioModal
+          onClose={() => {
+            setShowUsuarioModal(false)
+            setUsuarioParaEditar(null)
+          }}
+          onAdicionar={adicionarOuEditarUsuario}
+          usuarioParaEditar={usuarioParaEditar || undefined}
+          modoEdicao={!!usuarioParaEditar}
         />
       )}
     </div>
