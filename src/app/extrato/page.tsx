@@ -47,7 +47,7 @@ export default function Extrato() {
               <h2 className={styles['extrato__item-titulo']}>{registro.titulo}</h2>
               <span className={styles['extrato__item-data']}>{registro.data}</span>
             </div>
-            <span className={styles['extrato__item-pontos']}>+{registro.pontos}$</span>
+            <span className={styles['extrato__item-pontos']}>+{registro.pontos} C$</span>
           </div>
         ))}
       </div>

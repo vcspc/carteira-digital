@@ -21,7 +21,7 @@ export default function Dashboard() {
           <span>Conta</span>
           <h2>C$ {accountBalance.toFixed(2)}</h2>
         </div>
-        <Link href="/account" className={styles['wallet__account-link']}>
+        <Link href="/extrato" className={styles['wallet__account-link']}>
           <span className={styles['wallet__account-arrow']}>›</span>
         </Link>
       </div>
@@ -32,7 +32,7 @@ export default function Dashboard() {
           {availableChallenges.map((challenge, index) => (
             <div key={index} className={styles['wallet__challenge-item']}>
               <span className={styles['wallet__challenge-text']}>{challenge.title}</span>
-              <span>{challenge.reward}C$</span>
+              <span>{challenge.reward} C$</span>
             </div>
           ))}
         </div>
@@ -42,7 +42,7 @@ export default function Dashboard() {
           {completedChallenges.map((challenge, index) => (
             <div key={index} className={styles['wallet__challenge-item']}>
               <span className={styles['wallet__challenge-text']}>{challenge.title}</span>
-              <span>+{challenge.reward}C$</span>
+              <span>+{challenge.reward} C$</span>
             </div>
           ))}
         </div>
