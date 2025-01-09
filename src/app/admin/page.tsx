@@ -2,8 +2,16 @@
 import { useState } from 'react'
 import styles from './Admin.module.scss'
 import { DesafioModal } from './components/DesafioModal'
-import { EditIcon, DeleteIcon } from './components/Icons'
+import { EditIcon, DeleteIcon, AttributeIcon } from './components/Icons'
 import { UsuarioModal } from './components/UsuarioModal'
+import { AtribuirDesafiosModal } from './components/AtribuirDesafiosModal'
+
+interface Usuario {
+  nome: string
+  email: string
+  senha: string
+  desafiosAtribuidos?: { nome: string, valor: string }[]
+}
 
 export default function AdminPage() {
   const [showModal, setShowModal] = useState(false)
@@ -16,11 +24,19 @@ export default function AdminPage() {
 
   const [showUsuarioModal, setShowUsuarioModal] = useState(false)
   const [usuarioParaEditar, setUsuarioParaEditar] = useState<{ nome: string, email: string, senha: string } | null>(null)
-  const [usuarios, setUsuarios] = useState([
-    { nome: 'Shandriny Costa', email: 'shandriny@email.com', senha: '123456' },
+  const [usuarios, setUsuarios] = useState<Usuario[]>([
+    { 
+      nome: 'Shandriny Costa', 
+      email: 'shandriny@email.com', 
+      senha: '123456',
+      desafiosAtribuidos: []
+    },
     { nome: 'Nataliane Silva', email: 'nataliane@email.com', senha: '123456' },
     { nome: 'Vinicius Costa', email: 'vinicius@email.com', senha: '123456' }
   ])
+
+  const [showAtribuirModal, setShowAtribuirModal] = useState(false)
+  const [usuarioSelecionado, setUsuarioSelecionado] = useState<Usuario | null>(null)
 
   const adicionarOuEditarDesafio = (novoDesafio: { nome: string, valor: string }) => {
     if (desafioParaEditar) {
@@ -52,6 +68,16 @@ export default function AdminPage() {
       setUsuarioParaEditar(null)
     } else {
       setUsuarios([...usuarios, novoUsuario])
+    }
+  }
+
+  const atribuirDesafios = (desafiosSelecionados: { nome: string, valor: string }[]) => {
+    if (usuarioSelecionado) {
+      setUsuarios(usuarios.map(usuario => 
+        usuario.nome === usuarioSelecionado.nome 
+          ? { ...usuario, desafiosAtribuidos: desafiosSelecionados }
+          : usuario
+      ))
     }
   }
 
@@ -101,6 +127,16 @@ export default function AdminPage() {
             <div key={index} className={styles.admin__item}>
               <span>{usuario.nome}</span>
               <div className={styles.admin__acoes}>
+                <button 
+                  className={`${styles.admin__icon_button} ${styles['admin__icon-button--atribuir']}`}
+                  onClick={() => {
+                    setUsuarioSelecionado(usuario)
+                    setShowAtribuirModal(true)
+                  }}
+                  title="Atribuir desafios"
+                >
+                  <AttributeIcon />
+                </button>
                 <button 
                   className={`${styles.admin__icon_button} ${styles['admin__icon-button--editar']}`}
                   onClick={() => {
@@ -154,6 +190,19 @@ export default function AdminPage() {
           onAdicionar={adicionarOuEditarUsuario}
           usuarioParaEditar={usuarioParaEditar || undefined}
           modoEdicao={!!usuarioParaEditar}
+        />
+      )}
+
+      {showAtribuirModal && usuarioSelecionado && (
+        <AtribuirDesafiosModal
+          onClose={() => {
+            setShowAtribuirModal(false)
+            setUsuarioSelecionado(null)
+          }}
+          onAtribuir={atribuirDesafios}
+          desafiosDisponiveis={desafios}
+          desafiosAtribuidos={usuarioSelecionado.desafiosAtribuidos}
+          nomeUsuario={usuarioSelecionado.nome}
         />
       )}
     </div>
