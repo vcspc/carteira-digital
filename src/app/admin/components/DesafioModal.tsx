@@ -26,11 +26,27 @@ export function DesafioModal({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
+    
+    // Validação para garantir que pontos seja um número válido
+    const pontosNumerico = parseInt(pontos)
+    if (isNaN(pontosNumerico) || pontosNumerico <= 0) {
+      alert('Por favor, insira um valor válido para os pontos')
+      return
+    }
+
     onAdicionar({
-      nome: nome,
-      valor: `${pontos} C$`
+      nome: nome.trim(),
+      valor: `${pontosNumerico} C$`
     })
     onClose()
+  }
+
+  const handlePontosChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const valor = e.target.value
+    // Aceita apenas números
+    if (/^\d*$/.test(valor)) {
+      setPontos(valor)
+    }
   }
 
   return (
@@ -45,14 +61,18 @@ export function DesafioModal({
             placeholder="Digite o desafio..."
             value={nome}
             onChange={(e) => setNome(e.target.value)}
+            required
           />
           <div className={styles.modal__grupo}>
             <label className={styles.modal__label}>Pontos</label>
             <input
-              type="number"
+              type="text"
               className={styles.modal__pontos}
               value={pontos}
-              onChange={(e) => setPontos(e.target.value)}
+              onChange={handlePontosChange}
+              required
+              min="1"
+              pattern="\d+"
             />
             <button type="submit" className={styles.modal__botao}>
               {modoEdicao ? 'salvar' : 'adicionar'}

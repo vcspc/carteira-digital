@@ -4,8 +4,18 @@ import styles from '../Admin.module.scss'
 
 interface UsuarioModalProps {
   onClose: () => void
-  onAdicionar: (novoUsuario: { nome: string, email: string, senha: string }) => void
-  usuarioParaEditar?: { nome: string, email: string, senha: string }
+  onAdicionar: (novoUsuario: { 
+    nome: string, 
+    email: string, 
+    senha: string, 
+    desafiosAtribuidos?: { nome: string, valor: string }[] 
+  }) => void
+  usuarioParaEditar?: { 
+    nome: string, 
+    email: string, 
+    senha: string, 
+    desafiosAtribuidos?: { nome: string, valor: string }[] 
+  }
   modoEdicao?: boolean
 }
 
@@ -13,12 +23,16 @@ export function UsuarioModal({ onClose, onAdicionar, usuarioParaEditar, modoEdic
   const [usuario, setUsuario] = useState({
     nome: usuarioParaEditar?.nome || '',
     email: usuarioParaEditar?.email || '',
-    senha: usuarioParaEditar?.senha || ''
+    senha: usuarioParaEditar?.senha || '',
+    desafiosAtribuidos: usuarioParaEditar?.desafiosAtribuidos || []
   })
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    onAdicionar(usuario)
+    onAdicionar({
+      ...usuario,
+      desafiosAtribuidos: usuario.desafiosAtribuidos
+    })
     onClose()
   }
 
