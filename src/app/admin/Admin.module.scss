@@ -203,10 +203,20 @@
     align-items: center;
     gap: $margem-pequena;
     padding: $padding-pequeno;
-    cursor: pointer;
+    position: relative;
+    padding-right: $padding-medio;
     
     &:hover {
       background-color: darken($cor-fundo, 5%);
+    }
+
+    .admin__icon_button {
+      opacity: 0.7;
+      transition: opacity 0.2s;
+
+      &:hover {
+        opacity: 1;
+      }
     }
   }
 

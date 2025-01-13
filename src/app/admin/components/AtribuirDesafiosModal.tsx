@@ -1,6 +1,7 @@
 'use client'
 import { useState } from 'react'
 import styles from '../Admin.module.scss'
+import { DeleteIcon } from './Icons'
 
 interface Desafio {
   nome: string
@@ -23,6 +24,7 @@ export function AtribuirDesafiosModal({
   nomeUsuario 
 }: AtribuirDesafiosModalProps) {
   const [novosSelecionados, setNovosSelecionados] = useState<Desafio[]>([])
+  const [desafiosAtuais, setDesafiosAtuais] = useState<Desafio[]>(desafiosAtribuidos)
 
   const handleToggleDesafio = (desafio: Desafio) => {
     const jaExiste = novosSelecionados.some(d => d.nome === desafio.nome)
@@ -33,9 +35,15 @@ export function AtribuirDesafiosModal({
     }
   }
 
+  const handleRemoverDesafio = (index: number) => {
+    const novosDesafios = [...desafiosAtuais]
+    novosDesafios.splice(index, 1)
+    setDesafiosAtuais(novosDesafios)
+  }
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    onAtribuir([...desafiosAtribuidos, ...novosSelecionados])
+    onAtribuir([...desafiosAtuais, ...novosSelecionados])
     onClose()
   }
 
@@ -46,14 +54,22 @@ export function AtribuirDesafiosModal({
           Atribuir Desafios para {nomeUsuario}
         </h3>
         <form onSubmit={handleSubmit} className={styles.modal__formulario}>
-          {desafiosAtribuidos.length > 0 && (
+          {desafiosAtuais.length > 0 && (
             <>
               <h4 className={styles.modal__subtitulo}>Histórico de desafios atribuídos:</h4>
               <div className={styles.modal__desafios}>
-                {desafiosAtribuidos.map((desafio, index) => (
+                {desafiosAtuais.map((desafio, index) => (
                   <div key={`${desafio.nome}-${index}`} className={styles.modal__desafio}>
                     <span className={styles.modal__desafio_nome}>{desafio.nome}</span>
                     <span className={styles.modal__desafio_valor}>{desafio.valor}</span>
+                    <button
+                      type="button"
+                      onClick={() => handleRemoverDesafio(index)}
+                      className={`${styles.admin__icon_button} ${styles['admin__icon-button--excluir']}`}
+                      title="Remover desafio"
+                    >
+                      <DeleteIcon />
+                    </button>
                   </div>
                 ))}
               </div>
