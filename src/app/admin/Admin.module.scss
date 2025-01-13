@@ -225,4 +225,11 @@
     color: $cor-secundaria;
     font-weight: bold;
   }
+
+  &__subtitulo {
+    color: $cor-texto-principal;
+    font-size: 1rem;
+    margin-top: $margem-media;
+    margin-bottom: $margem-pequena;
+  }
 }

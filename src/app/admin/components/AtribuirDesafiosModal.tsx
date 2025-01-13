@@ -22,20 +22,20 @@ export function AtribuirDesafiosModal({
   desafiosAtribuidos = [],
   nomeUsuario 
 }: AtribuirDesafiosModalProps) {
-  const [desafiosSelecionados, setDesafiosSelecionados] = useState<Desafio[]>(desafiosAtribuidos)
+  const [novosSelecionados, setNovosSelecionados] = useState<Desafio[]>([])
 
   const handleToggleDesafio = (desafio: Desafio) => {
-    const jaExiste = desafiosSelecionados.some(d => d.nome === desafio.nome)
+    const jaExiste = novosSelecionados.some(d => d.nome === desafio.nome)
     if (jaExiste) {
-      setDesafiosSelecionados(desafiosSelecionados.filter(d => d.nome !== desafio.nome))
+      setNovosSelecionados(novosSelecionados.filter(d => d.nome !== desafio.nome))
     } else {
-      setDesafiosSelecionados([...desafiosSelecionados, desafio])
+      setNovosSelecionados([...novosSelecionados, desafio])
     }
   }
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    onAtribuir(desafiosSelecionados)
+    onAtribuir([...desafiosAtribuidos, ...novosSelecionados])
     onClose()
   }
 
@@ -46,12 +46,27 @@ export function AtribuirDesafiosModal({
           Atribuir Desafios para {nomeUsuario}
         </h3>
         <form onSubmit={handleSubmit} className={styles.modal__formulario}>
+          {desafiosAtribuidos.length > 0 && (
+            <>
+              <h4 className={styles.modal__subtitulo}>Histórico de desafios atribuídos:</h4>
+              <div className={styles.modal__desafios}>
+                {desafiosAtribuidos.map((desafio, index) => (
+                  <div key={`${desafio.nome}-${index}`} className={styles.modal__desafio}>
+                    <span className={styles.modal__desafio_nome}>{desafio.nome}</span>
+                    <span className={styles.modal__desafio_valor}>{desafio.valor}</span>
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
+
+          <h4 className={styles.modal__subtitulo}>Selecione os desafios para atribuir:</h4>
           <div className={styles.modal__desafios}>
             {desafiosDisponiveis.map((desafio, index) => (
-              <label key={index} className={styles.modal__desafio}>
+              <label key={`${desafio.nome}-${index}`} className={styles.modal__desafio}>
                 <input
                   type="checkbox"
-                  checked={desafiosSelecionados.some(d => d.nome === desafio.nome)}
+                  checked={novosSelecionados.some(d => d.nome === desafio.nome)}
                   onChange={() => handleToggleDesafio(desafio)}
                   className={styles.modal__checkbox}
                 />
@@ -62,7 +77,7 @@ export function AtribuirDesafiosModal({
           </div>
           <div className={styles.modal__acoes}>
             <button type="submit" className={styles.modal__botao}>
-              Atribuir
+              Adicionar Desafios
             </button>
             <button
               type="button"
