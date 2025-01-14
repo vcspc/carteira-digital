@@ -114,6 +114,18 @@
     justify-content: center;
     font-size: 12px;
   }
+
+  &__nav {
+    margin-bottom: $margem-grande;
+  }
+
+  &__nav_link {
+    @include link_limpo;
+    @include botao;
+    background-color: $cor-primaria;
+    color: $cor-texto-secundario;
+    display: inline-block;
+  }
 }
 
 .modal {

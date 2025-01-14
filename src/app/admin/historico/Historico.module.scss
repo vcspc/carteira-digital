@@ -1,0 +1,88 @@
+@import '../../../style/design';
+
+.historico {
+  padding: $padding-grande;
+  
+  &__titulo {
+    font-size: $tamanho-fonte-titulo;
+    margin-bottom: $margem-grande;
+    color: $cor-texto-principal;
+  }
+
+  &__container {
+    background-color: $cor-fundo;
+    border-radius: 8px;
+    padding: $padding-grande;
+  }
+
+  &__vazio {
+    text-align: center;
+    color: $cor-secundaria;
+    padding: $padding-grande;
+  }
+
+  &__lista {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  &__item {
+    background-color: $cor-texto-secundario;
+    border-radius: 4px;
+    padding: $padding-medio;
+    margin-bottom: $margem-media;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &__cabecalho {
+    @include flex-center;
+    justify-content: space-between;
+    margin-bottom: $margem-pequena;
+  }
+
+  &__tipo {
+    font-weight: bold;
+    color: $cor-primaria;
+  }
+
+  &__acao {
+    background-color: $cor-primaria;
+    color: $cor-texto-secundario;
+    padding: $padding-pequeno;
+    border-radius: 4px;
+    font-size: 0.875rem;
+  }
+
+  &__data {
+    color: $cor-secundaria;
+    font-size: 0.875rem;
+  }
+
+  &__detalhes {
+    margin: $margem-pequena 0;
+    color: $cor-texto-principal;
+  }
+
+  &__usuario {
+    color: $cor-secundaria;
+    font-size: 0.875rem;
+    margin-top: $margem-pequena;
+  }
+}
+
+@media (max-width: 768px) {
+  .historico {
+    padding: $padding-medio;
+
+    &__cabecalho {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: $margem-pequena;
+    }
+  }
+}
