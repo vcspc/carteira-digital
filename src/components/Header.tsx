@@ -22,10 +22,21 @@ export default function Header({
         return 'Ranking';
       case '/perfil':
         return 'Perfil';
+      case '/admin/historico':
+        return 'Histórico';
+      case '/admin/ranking':
+        return 'Ranking';
+      case '/admin/perfil':
+        return 'Perfil';
       default:
         return '';
     }
   };
+
+  const isAdminRoute = pathname.startsWith('/admin');
+  const isAdminHome = pathname === '/admin';
+  const shouldShowEyeIcon = !isAdminRoute || isAdminHome;
+  const shouldShowGreeting = showGreeting && isAdminHome;
 
   const pageTitle = getPageTitle();
 
@@ -33,13 +44,16 @@ export default function Header({
     <header>
       <div className="header_container">
         <div>
-          <Link className="header_container_left" href="/perfil">
+          <Link 
+            className="header_container_left" 
+            href={isAdminRoute ? '/admin/perfil' : '/perfil'}
+          >
             <img 
               className="header_container_left_img" 
               src="img_perfil.svg" 
               alt="Imagem de perfil" 
             />
-            {showGreeting && (
+            {shouldShowGreeting && (
               <p className="header_container_left_text">Olá, José</p>
             )}
             {pageTitle && (
@@ -48,7 +62,7 @@ export default function Header({
           </Link>
         </div>
         <div className="header_container_right">
-          {showEyeIcon && (
+          {shouldShowEyeIcon && showEyeIcon && (
             <img 
               className="header_container_right_img" 
               src="olho.svg" 
